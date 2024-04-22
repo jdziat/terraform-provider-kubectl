@@ -1,21 +1,21 @@
 package main
 
 import (
-	kubernetes "github.com/gavinbunney/terraform-provider-kubectl/kubernetes"
 	goplugin "github.com/hashicorp/go-plugin"
 	"github.com/hashicorp/terraform-plugin-go/tfprotov5"
-	tf5server "github.com/hashicorp/terraform-plugin-go/tfprotov5/server"
+	tf5server "github.com/hashicorp/terraform-plugin-go/tfprotov5/tf5server"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
+	kubernetes "github.com/jdziat/terraform-provider-kubectl/kubernetes"
 	"google.golang.org/grpc"
 )
 
 func main() {
 	opts := &plugin.ServeOpts{}
 	grpcProviderFunc := func() tfprotov5.ProviderServer {
-		return schema.NewGRPCProviderServer(kubernetes.Provider())
+		provider := kubernetes.Provider()
+		return schema.NewGRPCProviderServer(provider)
 	}
-
 	// taken from github.com/hashicorp/terraform-plugin-sdk/v2@v2.3.0/plugin/serve.go
 	// configured to allow larger message sizes than 4mb
 	goplugin.Serve(&goplugin.ServeConfig{
