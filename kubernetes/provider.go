@@ -236,7 +236,6 @@ func providerConfigure(d *schema.ResourceData, terraformVersion string) (interfa
 	if cfg == nil {
 		cfg = &restclient.Config{}
 	}
-
 	kubectlApplyRetryCount = uint64(d.Get("apply_retry_count").(int))
 	if os.Getenv("KUBECTL_PROVIDER_APPLY_RETRY_COUNT") != "" {
 		applyEnvValue, _ := strconv.Atoi(os.Getenv("KUBECTL_PROVIDER_APPLY_RETRY_COUNT"))

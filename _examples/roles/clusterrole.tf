@@ -1,5 +1,3 @@
-provider "kubectl" {}
-
 
 resource "kubectl_manifest" "account" {
     yaml_body = <<YAML
