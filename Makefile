@@ -5,7 +5,7 @@ PKG_NAME=kubernetes
 export GO111MODULE=on
 
 export TESTARGS=-race -coverprofile=coverage.txt -covermode=atomic
-#export KUBECONFIG=$(CURRENT_DIR)/scripts/kubeconfig.yaml
+export KUBECONFIG=$(CURRENT_DIR)/scripts/kubeconfig.yaml
 
 default: build
 
